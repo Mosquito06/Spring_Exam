@@ -50,4 +50,9 @@ public class MemberImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE + ".readWithPw", map);
 	}
 
+	@Override
+	public String checkID(String id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".checkID", id);
+	}
+
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.persistence.PhotoDao">
+ 	<select id="list" resultType="PhotoVO">
+	    select * from photo
+	</select>
+	
+	<update id="update">
+	    update photo set filepath = #{filepath}, regdate = #{regdate} where num = #{num}	  
+	</update>
+	
+	<insert id="insert">
+	     insert into photo(filepath, num) values(#{filepath}, #{num})     
+	</insert>
+	
+	<delete id="delete">
+	    delete from photo where num = #{num}	    
+	</delete>
+	
+	<select id="selectByNum" resultType="PhotoVO">
+	    select * from photo where num = #{num}
+	</select>
+	
+</mapper>

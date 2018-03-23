@@ -1,42 +1,43 @@
 package com.dgit.domain;
 
-import java.util.Date;
-
 public class MemberVO {
-	private String userid;
-	private String userpw;
-	private String username;
+	private int num;
+	private String id;
+	private String pw;
+	private String name;
 	private String email;
-	private Date regdate;
-	private Date updatedate;
+	private String tel;
 
-	public MemberVO() {
-		super();
-		// TODO Auto-generated constructor stub
+	public int getNum() {
+		return num;
 	}
 
-	public String getUserid() {
-		return userid;
+	public void setNum(int num) {
+		this.num = num;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public String getId() {
+		return id;
 	}
 
-	public String getUserpw() {
-		return userpw;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public void setUserpw(String userpw) {
-		this.userpw = userpw;
+	public String getPw() {
+		return pw;
 	}
 
-	public String getUsername() {
-		return username;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -47,26 +48,18 @@ public class MemberVO {
 		this.email = email;
 	}
 
-	public Date getRegdate() {
-		return regdate;
+	public String getTel() {
+		return tel;
 	}
 
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
-	}
-
-	public Date getUpdatedate() {
-		return updatedate;
-	}
-
-	public void setUpdatedate(Date updatedate) {
-		this.updatedate = updatedate;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
 	@Override
 	public String toString() {
-		return "MemeberVO [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", email=" + email
-				+ ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "MemberVO [num=" + num + ", id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", tel="
+				+ tel + "]";
 	}
 
 }

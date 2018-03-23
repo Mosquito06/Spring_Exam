@@ -40,4 +40,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.readWithPW(userid, userpw);
 	}
 
+	@Override
+	public String checkID(String id) throws Exception {
+		return dao.checkID(id);
+	}
+
 }
