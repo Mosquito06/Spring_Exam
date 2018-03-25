@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,25 +75,54 @@ public class HomeController {
 		return "redirect: /exam/";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/loginCheck", method = RequestMethod.GET)
+	public ResponseEntity<String> loginCheck(String id, String pw) throws Exception{
+		
+		try{
+			String checkId = service.checkID(id); 
+			
+			if(checkId != null){
+				MemberVO user = service.readWithPW(id, pw);
+				
+				if(user != null){
+					return new ResponseEntity<String>("correct ID, PW", HttpStatus.OK);
+				}else{
+					return new ResponseEntity<String>("non-correct PW", HttpStatus.OK);
+				}
+			
+			}else{
+				return new ResponseEntity<String>("not exist ID", HttpStatus.OK);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String Sign(HttpServletRequest req){
 		req.getSession().removeAttribute("login");
 				
-		return "redirect: /exam/";
+		return "redirect: /exam/"; 
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String login(String id, String pw){
+	public void login(String id, String pw, Model model){
+		logger.info("Login 진입");
 		
-		try {
-			service.readWithPW(id, pw);
+		 
+		try{
+
+			MemberVO user = service.readWithPW(id, pw);
+			model.addAttribute("login", user); 
+					
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		
-		return "";
 	}
 	
 	

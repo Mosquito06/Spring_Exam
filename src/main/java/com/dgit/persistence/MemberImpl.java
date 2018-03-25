@@ -44,8 +44,8 @@ public class MemberImpl implements MemberDao {
 	@Override
 	public MemberVO readWithPW(String userid, String userpw) throws Exception {
 		Map<String, Object> map = new HashMap<>();
-		map.put("userid", userid);
-		map.put("userpw", userpw);
+		map.put("id", userid);
+		map.put("pw", userpw);
 		
 		return sqlSession.selectOne(NAMESPACE + ".readWithPw", map);
 	}

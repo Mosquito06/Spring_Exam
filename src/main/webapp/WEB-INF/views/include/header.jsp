@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
@@ -107,6 +108,33 @@
 			$("#signForm").submit();
 
 		})
+		
+		
+		$("#loginBtn").click(function(e){
+			e.preventDefault();
+			
+			var id = $("#id").val();
+			var pw = $("#pw").val();
+
+			$.ajax({
+				url : "loginCheck?id=" + id + "&pw=" + pw,
+				type: "get",
+				dataType : "text",
+				success : function(result){
+					if(result == "correct ID, PW"){
+						$("#loginForm").submit();
+					}else if(result == "not exist ID"){
+						alert("존재하지 않는 아이디입니다.");
+					}else if(result == "non-correct PW"){
+						alert("비밀번호가 일치하지 않습니다.");
+					}
+				}
+					
+			})
+			
+			
+		})
+		
 				
 	})
 
@@ -162,7 +190,7 @@
         <h4 class="modal-title">Login</h4>
       </div>
       <div class="modal-body">
-        <form action="/login" method="post">
+        <form action="/exam/login" method="post" id="loginForm">
 		  <div class="form-group">
 		    <label for="id">ID:</label>
 		    <input type="text" class="form-control" id="id" name="id">
@@ -171,7 +199,7 @@
 		    <label for="pw">Password:</label>
 		    <input type="password" class="form-control" id="pw" name="pw">
 		  </div>
-		  <button type="submit" class="btn btn-default">Submit</button>
+		  <button type="submit" class="btn btn-default" id="loginBtn">Submit</button>
 		</form>
        </div>
       <div class="modal-footer">
