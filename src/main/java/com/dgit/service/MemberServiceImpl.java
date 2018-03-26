@@ -6,13 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dgit.domain.MemberVO;
+import com.dgit.domain.PhotoVO;
 import com.dgit.persistence.MemberDao;
+import com.dgit.persistence.PhotoDao;
 
 @Repository
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private MemberDao dao;
+	
+	@Autowired
+	private PhotoDao photoDao;
+	
 	
 	@Override
 	public List<MemberVO> list() throws Exception {
@@ -43,6 +49,25 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String checkID(String id) throws Exception {
 		return dao.checkID(id);
+	}
+
+	@Override
+	public MemberVO selectByNum(int num) throws Exception {
+		List<PhotoVO> photo = photoDao.selectByNum(num);
+		MemberVO vo = dao.selectByNum(num);
+		System.out.println(photo.size());
+		System.out.println(num);
+		System.out.println(vo.toString());
+		
+		
+		if(photo.size() > 0){
+			System.out.println("진입?");
+			PhotoVO[] images = photo.toArray(new PhotoVO[photo.size()]);			
+			
+			vo.setImages(images);
+		}
+
+		return vo;
 	}
 
 }

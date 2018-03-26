@@ -1,5 +1,7 @@
 package com.dgit.domain;
 
+import java.util.Arrays;
+
 public class MemberVO {
 	private int num;
 	private String id;
@@ -7,6 +9,7 @@ public class MemberVO {
 	private String name;
 	private String email;
 	private String tel;
+	private PhotoVO[] images;
 
 	public int getNum() {
 		return num;
@@ -56,10 +59,18 @@ public class MemberVO {
 		this.tel = tel;
 	}
 
+	public PhotoVO[] getImages() {
+		return images;
+	}
+
+	public void setImages(PhotoVO[] images) {
+		this.images = images;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [num=" + num + ", id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", tel="
-				+ tel + "]";
+				+ tel + ", images=" + Arrays.toString(images) + "]";
 	}
 
 }

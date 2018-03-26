@@ -14,7 +14,7 @@
 	</insert>
 	
 	<delete id="delete">
-	    delete from photo where num = #{num}	    
+	    delete from photo where num = #{num} and filepath = #{filepath}
 	</delete>
 	
 	<select id="selectByNum" resultType="PhotoVO">

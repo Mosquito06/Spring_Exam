@@ -26,14 +26,14 @@
 	</beans:bean>
 	
 	<beans:bean id="uploadPath" class="java.lang.String">
-	    <beans:constructor-arg value="c:/zzz/upload"/>
+	    <beans:constructor-arg value="c:/spring/upload"/>
 	</beans:bean>
 	
 	<beans:bean id="loginInterceptor" class="com.dgit.interceptor.LoginInterceptor"/>
 	
 	<interceptors>
 	    <interceptor>
-	        <mapping path="/exam/login"/>
+	        <mapping path="/login"/>
 	        <beans:ref bean="loginInterceptor"/>
 	    </interceptor>
 	</interceptors>

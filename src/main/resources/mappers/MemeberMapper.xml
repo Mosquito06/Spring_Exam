@@ -24,4 +24,8 @@
 	<select id="checkID" resultType="String">
 	   select id from photo_user where id = #{id}
 	</select>
+	
+	<select id="selectByNum" resultType="MemberVO">
+	    select * from photo_user where num = #{num}
+	</select>
 </mapper>

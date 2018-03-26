@@ -1,45 +1,48 @@
-package com.dgit.persistence;
+package com.dgit.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dgit.domain.PhotoVO;
+import com.dgit.persistence.PhotoDao;
 
 @Repository
-public class PhotoImpl implements PhotoDao {
-	private final String NAMESPACE = "com.dgit.persistence.PhotoDao";
-	
-	 
+public class PhotoServiceImpl implements PhotoService {
+
 	@Autowired
-	private SqlSession sqlSession;
+	private PhotoDao dao;
+	
 	
 	@Override
 	public List<PhotoVO> list() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".list");
+		return dao.list();
 	}
 
 	@Override
 	public void update(PhotoVO photo) throws Exception {
-		sqlSession.update(NAMESPACE + ".update", photo);
+		dao.update(photo);
+
 	}
 
 	@Override
 	public void insert(PhotoVO photo) throws Exception {
-		sqlSession.insert(NAMESPACE + ".insert", photo);
+		dao.insert(photo);
 
 	}
 
 	@Override
 	public void delete(PhotoVO photo) throws Exception {
-		sqlSession.delete(NAMESPACE + ".delete", photo);
+		dao.delete(photo);
+
 	}
 
 	@Override
 	public List<PhotoVO> selectByNum(int num) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".selectByNum", num);
+		return dao.selectByNum(num);
 	}
+
+	
 
 }

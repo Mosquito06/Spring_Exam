@@ -11,4 +11,5 @@ public interface MemberService {
 	public void delete(MemberVO member) throws Exception;
 	public MemberVO readWithPW(String userid, String userpw) throws Exception;
 	public String checkID(String id) throws Exception;
+	public MemberVO selectByNum(int num) throws Exception;
 }

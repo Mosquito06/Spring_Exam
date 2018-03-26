@@ -55,4 +55,9 @@ public class MemberImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE + ".checkID", id);
 	}
 
+	@Override
+	public MemberVO selectByNum(int num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".selectByNum", num);
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class PhotoVO {
 	private String filepath;
+	private String originalFile;
 	private int num;
 	private Date regdate;
 
@@ -31,9 +32,18 @@ public class PhotoVO {
 		this.regdate = regdate;
 	}
 
+	public String getOriginalFile() {
+		return originalFile;
+	}
+
+	public void setOriginalFile(String originalFile) {
+		this.originalFile = originalFile;
+	}
+
 	@Override
 	public String toString() {
-		return "PhotoVO [filepath=" + filepath + ", num=" + num + ", regdate=" + regdate + "]";
+		return "PhotoVO [filepath=" + filepath + ", originalFile=" + originalFile + ", num=" + num + ", regdate="
+				+ regdate + "]";
 	}
 
 }

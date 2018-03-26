@@ -25,9 +25,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			MemberVO vo = (MemberVO) object;
 			
 			session.setAttribute("login", vo);
-			response.sendRedirect(request.getContextPath() + "/");
+			response.sendRedirect(request.getContextPath() + "/goMain?num=" + vo.getNum());
 		}
-		
+		 
 	}
 
 	@Override
