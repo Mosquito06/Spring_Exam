@@ -78,7 +78,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/sign", method = RequestMethod.POST)
 	public String Sign(MemberVO vo, String signId, String signPw, HttpServletRequest req){
-		logger.info("회원가입 진입!!");
+		// logger.info("회원가입 진입!!");
 		vo.setId(signId);
 		vo.setPw(signPw);
 		
@@ -90,7 +90,10 @@ public class HomeController {
 			
 			e.printStackTrace();
 		}
-		return "redirect: /exam/";
+		// logger.info("num = " + vo.getNum());
+		
+		
+		return "redirect: /exam/goMain?num=" + vo.getNum();
 	}
 	
 	@ResponseBody
@@ -128,7 +131,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public void login(String id, String pw, Model model){
-		logger.info("Login 진입");
+		// logger.info("Login 진입");
 		 
 		 
 		try{
@@ -145,14 +148,14 @@ public class HomeController {
 	
 	@RequestMapping(value="/addPhoto", method = RequestMethod.GET)
 	public String addPhoto(@ModelAttribute("num")int num){
-		logger.info("add GET 진입");
+		// logger.info("add GET 진입");
 				
 		return "add";
 	}
 	
 	@RequestMapping(value="/addPhoto", method = RequestMethod.POST)
 	public String addPhotoPOST(MemberVO vo, List<MultipartFile> files, Model model){
-		logger.info("add POST 진입");
+		// logger.info("add POST 진입");
 		
 		try{
 			for(MultipartFile f : files){
@@ -175,9 +178,7 @@ public class HomeController {
 	public String goMain(@ModelAttribute("num") int num, Model model) throws Exception{
 		
 		MemberVO vo = null;
-		
-		
-		
+
 		if(num != 0){
 			vo = service.selectByNum(num);
 			PhotoVO[] photo = vo.getImages();
@@ -197,9 +198,23 @@ public class HomeController {
 	
 	@ResponseBody
 	@RequestMapping(value="displayFile", method = RequestMethod.GET) 
-	public ResponseEntity<byte[]> displayFile(String filename){
+	public ResponseEntity<byte[]> displayFile(String filename, String check){
 		ResponseEntity<byte[]> entity = null;
-		logger.info("filename : " + filename);
+		
+		if(check.equals("false")){
+			entity = getDisplayFile(filename);	
+		}else{
+			filename = filename.substring(0, filename.indexOf("s_")) + filename.substring(filename.indexOf("s_") + 2);
+			entity = getDisplayFile(filename);	
+		}
+		
+		return entity;
+	}
+
+
+	private ResponseEntity<byte[]> getDisplayFile(String filename) {
+		ResponseEntity<byte[]> entity = null;
+		// logger.info("filename : " + filename);
 		FileInputStream in = null;
 		
 		try{
@@ -221,9 +236,11 @@ public class HomeController {
 		
 		}catch(Exception e){
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
-		}	
+		}
 		return entity;
 	}
+	
+	
 	
 	@RequestMapping(value="delPhoto", method = RequestMethod.POST)
 	public String delPhoto(String target, int num) throws Exception{
@@ -231,7 +248,7 @@ public class HomeController {
 		PhotoVO vo = new PhotoVO();
 		vo.setFilepath(target);
 		vo.setNum(num);
-		
+		UploadFileUtils.deleteImg(target);
 		photoService.delete(vo);
 				
 		return "redirect: /exam/goMain?num=" + vo.getNum();

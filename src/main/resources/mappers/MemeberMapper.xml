@@ -13,7 +13,7 @@
 	   update photo_user set pw = #{pw}, name = #{name}, email = #{email}, tel = #{tel} where num = #{num}
 	</update>
 	
-	<insert id="insert">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="num">
 	   insert into photo_user(id, pw, name, email, tel) values(#{id}, password(#{pw}), #{name}, #{email}, #{tel})
 	</insert>
 	

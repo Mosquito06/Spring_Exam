@@ -39,7 +39,7 @@
       					<form action="delPhoto" method="post">
 	      					<div class="list-group-item">
 						 		<div class="w3-card-4">
-							  		<img src="displayFile?filename=${image.filepath }">
+							  		<a href="displayFile?filename=${image.filepath }&check=true"><img src="displayFile?filename=${image.filepath }&check=false"></a>
 							  		 <div class="w3-container w3-center">
 							  		 	<input type="hidden" value="${num }" name="num">
 							  		 	<input type="hidden" value="${image.filepath }" name="target">
