@@ -90,7 +90,8 @@ public class HomeController {
 			
 			e.printStackTrace();
 		}
-		// logger.info("num = " + vo.getNum());
+		
+		logger.info("num = " + vo.getNum());
 		
 		
 		return "redirect: /exam/goMain?num=" + vo.getNum();
