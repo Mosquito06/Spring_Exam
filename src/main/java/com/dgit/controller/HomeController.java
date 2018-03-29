@@ -189,7 +189,7 @@ public class HomeController {
 					photo[i].setOriginalFile(originalName[originalName.length - 1]);
 				}
 				
-			}
+			} 
 						
 			model.addAttribute("images", vo);
 		}
